@@ -1,0 +1,577 @@
+//====================================================================================================
+
+//====================================================================================================
+
+// TODO BLOCK Aside
+
+.contact--setup {
+
+	@media (min-width: toEm(801)){
+		height: 100vh;
+		display: grid;
+		grid-template-columns: 0.42fr 1fr;
+		column-gap: toEm(25);
+		justify-items: center;
+	}
+}
+
+.page--speaking {
+	padding-top: toEm(80);
+}
+
+.page {
+// .page__block-qoute
+	&__block-qoute{
+		max-width: toEm(1485);
+		margin: 0 auto;
+		padding: 0 toEm(15);
+	}
+}
+
+//!BEM Block
+.contact {
+
+		// .contact__help
+		&__help {
+			position: relative;
+			
+			@media (min-width: toEm(801)){
+				padding: toEm(48);
+
+				&::before{
+					content: "";
+					position: absolute;
+					width: 100vw;
+					height: 100%;
+					top: 0;
+					right: 0;
+					background-color: $colorBackroudOtherSection;
+					z-index: -1;
+	
+				}
+			}
+
+			@media (max-width: toEm(800)){
+				align-items: center;
+				padding-top: toEm(20);
+				padding-bottom: toEm(20);
+			}
+			
+
+			background: $colorBackroudOtherSection;
+			color: $fontColorOther;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			row-gap: toEm(32);
+
+			height: 100%;
+
+		}
+
+		// .contact__qoute
+		&__qoute {
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			@media (min-width: toEm(801)){
+				max-width: toEm(510);
+				align-self: center;
+			}
+
+			@media (max-width: toEm(800)){
+				max-width: toEm(1246);
+				padding-bottom: toEm(55);
+			}
+			
+			padding: clamp(0rem, -7.521rem + 15.02vw, 6rem) 0 toEm(55) 0; //!96-55
+		}
+}
+
+//!BEM Block
+.help {
+
+		// .help__info-content
+		&__info-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			row-gap: toEm(32);
+		}
+
+		// .help__box-text
+		&__box-text {
+			
+
+			@media (max-width: toEm(800)){
+				text-align: center;
+			}
+		}
+
+		// .help__connection
+		&__connection {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			row-gap: toEm(32);
+		}
+
+		// .help__socials
+		&__socials {
+			font-family: $fontFamilyIcon;
+			font-size: toRem(24);
+			color: $fontSubCaption;
+
+			display: flex;
+			// flex-wrap: wrap;
+			column-gap: toRem(32);
+		}
+}
+
+//!BEM Block
+.box-text {
+		// .box-text__title
+
+		&__title {
+		font-size: toRem(24);
+		font-style: normal;
+		font-weight: 600;
+		line-height: 1.33;
+
+		&:not(:last-child){
+		margin-bottom: toEm(16, 24);
+		}
+		}
+
+		// .box-text__paragraph
+		&__paragraph {
+			color: $fontSubCaption;
+			font-size: toRem(18);
+			line-height: 1.56;
+
+			&:not(:last-child){
+			margin-bottom: toEm(20, 18);
+			}
+
+			& p:not(:last-child){
+			margin-bottom: toEm(10, 18);
+			}
+		}
+}
+
+//!BEM Block
+.connection {
+
+		// .connection__box
+		&__box {
+		}
+
+		// .connection__inner
+		&__inner{
+
+		}
+
+		// .connection__box--email
+		&__box--email {
+			display: flex;
+			column-gap: toEm(16);
+
+			&::before{
+				content: "\65";
+				font-family: $fontFamilyIcon;
+				font-size: toRem(24);
+			}
+		}
+
+		// .connection__subcaption
+		&__subcaption {
+			font-size: toRem(20);
+			font-weight: 600;
+			line-height: 1.5;
+
+			&:not(:last-child){
+			margin-bottom: toEm(8);
+			}
+		}
+
+		// .connection__subparagraph
+		&__subparagraph {
+			color: $fontSubCaption;
+			line-height: 1.5;
+
+			&:not(:last-child){
+				margin-bottom: toEm(20);
+				}
+
+			& p:not(:last-child){
+				margin-bottom: toEm(8);
+				}
+		}
+
+		// .connection__item
+		&__item {
+			font-weight: 600;
+			line-height: 1.5;
+
+			transition: all .3s ease-in;
+         @media (any-hover: hover) {
+         cursor: pointer;
+         &:hover {
+            color: $colorArrow;
+         }
+      }
+		}
+
+		// .connection__box--call
+		&__box--call {
+			display: flex;
+			column-gap: toEm(16);
+
+			&::before{
+				content: "\70";
+				font-family: $fontFamilyIcon;
+				font-size: toRem(24);
+			}
+		}
+}
+
+//!BEM Block
+.socials {
+
+		// .socials__pic
+		&__pic {
+			transition: all .3s ease-in;
+         @media (any-hover: hover) {
+         cursor: pointer;
+         &:hover {
+            color: $colorArrow;
+         }
+      }
+		}
+}
+
+//!BEM Block
+.quote {
+
+	// .quote__text-inner
+	&__text-inner {
+		&:not(:last-child){
+		margin-bottom: clamp(1.5rem, 1.071rem + 2.14vw, 3rem); //!48-24
+		}
+	}
+
+		// .quote__caption
+		&__caption {
+			color: $fontSubTitle;
+			font-size: toRem(36);
+			font-weight: 600;
+			line-height: 1.22;
+			letter-spacing: toEm(-0.72);
+
+			&:not(:last-child){
+			margin-bottom: toEm(20, 36);
+			}
+
+			@media (max-width: toEm(800)){
+			text-align: center;
+			}
+		}
+
+		&__paragraph {
+			font-size: toRem(20);
+			line-height: 1.5;
+
+			&:not(:last-child){
+			margin-bottom: toEm(15, 20);
+			}
+
+			& p:not(:last-child){
+			margin-bottom: toEm(10, 20);
+			}
+
+			@media (max-width: toEm(800)){
+				text-align: center;
+				}
+		}
+
+		// .quote__registration
+		&__registration {
+			display: flex;
+			flex-direction: column;
+			row-gap: toEm(24);
+			width: 100%;
+		}
+}
+
+//!BEM Block
+.registration {
+
+		// .registration__name-box
+		&__name-box {
+			display: flex;
+			column-gap: toEm(32);
+
+			@media (max-width: toEm(800)){
+				justify-content: space-between;
+			}
+
+			@media (max-width: toEm(519)){
+				flex-direction: column;
+				row-gap: toEm(24);
+			}
+		}
+
+		// .registration__first-name
+		&__first-name {
+			@include tempaleLabelForm;
+			@media (max-width: toEm(800)){
+				flex-grow: 1;
+			}
+		}
+
+		// .registration__name-fitst-field
+		&__name-fitst-field {
+			@include tempaleFieldForm;
+
+		}
+
+		// .registration__last-name
+		&__last-name {
+			@include tempaleLabelForm;
+			@media (max-width: toEm(800)){
+				flex-grow: 1;
+			}
+		}
+
+		// .registration__name-last-field
+		&__name-last-field {
+			@include tempaleFieldForm;
+		}
+
+		// .registration__mail
+		&__mail {
+			@include tempaleLabelForm;
+		}
+
+		// .registration__mail-field
+		&__mail-field {
+			@include tempaleFieldForm;
+		}
+
+		// .registration__phone
+		&__phone {
+			@include tempaleLabelForm;
+		}
+
+		// .registration__phone-field
+		&__phone-field {
+			@include tempaleFieldForm;
+		}
+
+		// .registration__message
+		&__message {
+			@include tempaleLabelForm;
+		}
+
+		// .registration__message-field
+		&__message-field {
+			@include tempaleFieldForm (toEm(134));
+		}
+
+		
+		// .registration__set-check
+		&__set-check {
+			// &:not(:last-child){
+			// margin-bottom: toEm(32);
+			// }
+		}
+
+			// .registration__subtitle-box
+			&__subtitle-box {
+				@include tempaleLabelForm;
+
+				&:not(:last-child){
+				margin-bottom: toEm(16);
+				}
+			}
+
+			// .registration__wrap-box
+			&__wrap-box {
+				display: flex;
+
+				@media (min-width: toEm(391)){
+					justify-content: space-between;
+				}
+				
+				@media (max-width: toEm(390.98)){
+					flex-direction: column;
+					row-gap: toEm(16);
+				}	
+			}
+
+		// .registration__check-row
+		&__check-row {
+			display: flex;
+			flex-direction: column;
+			row-gap: toEm(16);
+		}
+
+		// .registration__cellcheckbox
+		&__cellcheckbox {
+			position: relative;
+		}
+
+		// .registration__field-design
+		&__field-design {
+			@extend %tempaleFieldForm;
+			
+			&:focus-visible + .registration__design-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__design-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__design-label
+		&__design-label {
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__field-creat
+		&__field-creat {
+			@extend %tempaleFieldForm;
+			&:focus-visible + .registration__creat-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__creat-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__creat-label
+		&__creat-label {
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__field-ux
+		&__field-ux {
+			@extend %tempaleFieldForm;
+			&:focus-visible + .registration__ux-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__ux-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__ux-label
+		&__ux-label {
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__field-strategy
+		&__field-strategy {
+			@extend %tempaleFieldForm;
+
+			&:focus-visible + .registration__strategy-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__strategy-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__strategy-label
+		&__strategy-label {
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__field-research
+		&__field-research {
+			@extend %tempaleFieldForm;
+
+			&:focus-visible + .registration__research-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__research-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__research-label
+		&__research-label{
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__field-other
+		&__field-other {
+			@extend %tempaleFieldForm;
+
+			&:focus-visible + .registration__other-label::before{
+				outline: toEm(2) solid $colorBackroudOtherSection;
+			}
+
+			&:checked + .registration__other-label::before{
+				background: url("../img/contact/check_box.svg") 0 0 / cover no-repeat;
+			}
+		}
+
+		// .registration__other-label
+		&__other-label {
+			@extend %tempaleLabelForm;
+		}
+
+		// .registration__btn-form
+		&__btn-form {
+			text-align: center;
+
+			color: $fontColorOther;
+			font-weight: 600;
+			line-height: 1.5;
+
+			border-radius: toEm(8);
+			border: toEm(1) solid $colorHoverButtonLink;
+			background: $colorHoverButtonLink;
+			box-shadow: $colorShadowItem;
+			padding: toEm(12) 0;
+
+			transition: all .3s ease-in;
+
+			@media (any-hover: hover) {
+			cursor: pointer;
+			&:hover {
+					background: $colorArrow;
+					border: toEm(1) solid $colorArrow;
+				}
+					}
+				
+		}
+
+		// .registration__send
+		&__send {
+			
+		}
+}
+
+
+@media (min-width: toEm(801)){
+	.footer {
+		
+		&__container{
+			padding-bottom: 0;
+			padding-top: 0;
+		}
+	}
+
+}
+
