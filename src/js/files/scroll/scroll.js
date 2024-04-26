@@ -22,9 +22,12 @@ export function pageNavigation() {
 		if (e.type === "click") {
 			const targetElement = e.target;
 			if (targetElement.closest('[data-goto]')) {
+				e.preventDefault();
+
 				const gotoLink = targetElement.closest('[data-goto]');
 				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : '';
 				const noHeader = gotoLink.hasAttribute('data-goto-header') ? true : false;
+				const onAnotherPage = gotoLink.hasAttribute('data-goto-page') ? true : false; // якщо можливий перехід на іншу сторінку
 				const gotoSpeed = gotoLink.dataset.gotoSpeed ? gotoLink.dataset.gotoSpeed : 500;
 				const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
 				if (flsModules.fullpage) {
@@ -35,9 +38,25 @@ export function pageNavigation() {
 						document.documentElement.classList.contains("menu-open") ? menuClose() : null;
 					}
 				} else {
-					gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+					// якщо атрибут data-goto-page є
+					if (onAnotherPage){
+						const targetBlockElement = document.querySelector(gotoLinkSelector);
+						// то перевіряємо є потрібний елемент на сторінці
+						if (targetBlockElement){
+							// якщо є то скролимо до нього
+							gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+						} else {
+							// якщо нема то йдемо на потрібну сторінку
+							let targetLink = gotoLink.href; // отримуємо атрибута href
+							window.location.href = targetLink; // і робимо перехід на потрібну сторінку
+						}
+					} else {
+						//якщо атрибута data-goto-page немає то просто скролимо до потрібного блоку
+						gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+					}
+					
 				}
-				e.preventDefault();
+				
 			}
 		} else if (e.type === "watcherCallback" && e.detail) {
 			const entry = e.detail.entry;
@@ -76,7 +95,7 @@ export function pageNavigation() {
 		} else if (document.querySelector(`.${getHash()}`)) {
 			goToHash = `.${getHash()}`;
 		}
-		goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
+		goToHash ? gotoBlock(goToHash, true, 600, 20) : null;
 	}
 }
 // Робота з шапкою при скролі

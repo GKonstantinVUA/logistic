@@ -3,7 +3,6 @@ import { isMobile } from "./functions.js";
 // Підключення списку активних модулів
 import { flsModules } from "./modules.js";
 
-
 // TODO Кнопка скролу вверх
 const btnUp = {
   el: document.querySelector('.scroll-up'),
@@ -75,12 +74,12 @@ btnUp.addEventListener();
 
 const currentPage = window.location.pathname.split('/').pop();
 
-  const menuLinks = document.querySelectorAll('.menu__link');
-  menuLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPage) {
-      link.classList.add('active');
-    }
-  });
+const menuLinks = document.querySelectorAll('.menu__link');
+menuLinks.forEach(link => {
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+  }
+});
 
 
 //TODO Перебір form регистрації
@@ -105,44 +104,46 @@ const inputPass = document.getElementById('client-blank__cell-item-pass');
 const iconPass = document.getElementById('pass-icon');
 iconPass.addEventListener('click', () => {
 
-	if (inputPass.getAttribute('type') === "password") {
-inputPass.setAttribute('type', 'text');
-} else {
-inputPass.setAttribute('type', 'password');
-} 
+  if (inputPass.getAttribute('type') === "password") {
+    inputPass.setAttribute('type', 'text');
+  } else {
+    inputPass.setAttribute('type', 'password');
+  }
 });
 
 const inputPassReg = document.getElementById('client-blank__cell-item-pass-reg');
 const iconPassReg = document.getElementById('pass-icon-reg');
 iconPassReg.addEventListener('click', () => {
 
-	if (inputPassReg.getAttribute('type') === "password") {
-inputPassReg.setAttribute('type', 'text');
-} else {
-inputPassReg.setAttribute('type', 'password');
-} 
+  if (inputPassReg.getAttribute('type') === "password") {
+    inputPassReg.setAttribute('type', 'text');
+  } else {
+    inputPassReg.setAttribute('type', 'password');
+  }
 });
 
 //TODO Коди стран
 
-document.addEventListener('DOMContentLoaded', function() {
-  var input = document.querySelector("#registration__phone");
-  var iti = intlTelInput(input, {
+document.addEventListener('DOMContentLoaded', function () {
+  let input = document.querySelector("#registration__phone");
+  if (input) { // делать проверку на наличие чтобы не было ошибки в консоле
+    let iti = intlTelInput(input, {
       initialCountry: "auto",
-      geoIpLookup: function(callback) {
-          fetch("https://ipinfo.io/", {
-              method: "GET"
-          }).then(function(response) {
-              if (response.ok) {
-                  return response.json();
-              }
-              throw new Error("Failed to fetch country");
-          }).then(function(data) {
-              callback(data.country);
-          }).catch(function() {
-              callback("us"); // Default to United States
-          });
+      geoIpLookup: function (callback) {
+        fetch("https://ipinfo.io/", {
+          method: "GET"
+        }).then(function (response) {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Failed to fetch country");
+        }).then(function (data) {
+          callback(data.country);
+        }).catch(function () {
+          callback("us"); // Default to United States
+        });
       },
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-  });
+    });
+  }
 });
