@@ -39,10 +39,10 @@ export function pageNavigation() {
 					}
 				} else {
 					// якщо атрибут data-goto-page є
-					if (onAnotherPage){
+					if (onAnotherPage) {
 						const targetBlockElement = document.querySelector(gotoLinkSelector);
 						// то перевіряємо є потрібний елемент на сторінці
-						if (targetBlockElement){
+						if (targetBlockElement) {
 							// якщо є то скролимо до нього
 							gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
 						} else {
@@ -54,9 +54,9 @@ export function pageNavigation() {
 						//якщо атрибута data-goto-page немає то просто скролимо до потрібного блоку
 						gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
 					}
-					
+
 				}
-				
+
 			}
 		} else if (e.type === "watcherCallback" && e.detail) {
 			const entry = e.detail.entry;
