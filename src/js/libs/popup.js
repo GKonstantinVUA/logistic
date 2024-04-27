@@ -317,14 +317,15 @@ class Popup {
 		let classInHash = document.querySelector(`.${window.location.hash.replace('#', '')}`) ? `.${window.location.hash.replace('#', '')}` :
 			document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` :
 				null;
+		if (classInHash) { // додаткова перевірка, бо може бути помилка
+			const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace('.', "#")}"]`);
 
-		const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace('.', "#")}"]`);
+			// this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ?
+			// 	buttons.getAttribute(this.options.youtubeAttribute) :
+			// 	null;
 
-		// this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ?
-		// 	buttons.getAttribute(this.options.youtubeAttribute) :
-		// 	null;
-
-		if (buttons && classInHash) this.open(classInHash);
+			if (buttons) this.open(classInHash);
+		}
 	}
 	// Встановлення хеша
 	_setHash() {

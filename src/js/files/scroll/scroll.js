@@ -21,29 +21,50 @@ export function pageNavigation() {
 	function pageNavigationAction(e) {
 		if (e.type === "click") {
 			const targetElement = e.target;
-			if (targetElement.closest('[data-goto]')) {
-				const gotoLink = targetElement.closest('[data-goto]');
-				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : '';
-				const noHeader = gotoLink.hasAttribute('data-goto-header') ? true : false;
+			if (targetElement.closest("[data-goto]")) {
+				e.preventDefault();
+
+				const gotoLink = targetElement.closest("[data-goto]");
+				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : "";
+				const noHeader = gotoLink.hasAttribute("data-goto-header") ? true : false;
+				const onAnotherPage = gotoLink.hasAttribute("data-goto-page") ? true : false; // якщо можливий перехід на іншу сторінку
 				const gotoSpeed = gotoLink.dataset.gotoSpeed ? gotoLink.dataset.gotoSpeed : 500;
 				const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
 				if (flsModules.fullpage) {
-					const fullpageSection = document.querySelector(`${gotoLinkSelector}`).closest('[data-fp-section]');
+					const fullpageSection = document
+						.querySelector(`${gotoLinkSelector}`)
+						.closest("[data-fp-section]");
 					const fullpageSectionId = fullpageSection ? +fullpageSection.dataset.fpId : null;
 					if (fullpageSectionId !== null) {
 						flsModules.fullpage.switchingSection(fullpageSectionId);
 						document.documentElement.classList.contains("menu-open") ? menuClose() : null;
 					}
 				} else {
-					gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+
+					// якщо атрибут data-goto-page є
+					if (onAnotherPage) {
+						const targetBlockElement = document.querySelector(gotoLinkSelector);
+						// то перевіряємо є потрібний елемент на сторінці
+						if (targetBlockElement) {
+							// якщо є то скролимо до нього
+							gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+						} else {
+							// якщо нема то йдемо на потрібну сторінку
+							let targetLink = gotoLink.href; // отримуємо атрибута href
+							window.location.href = targetLink; // і робимо перехід на потрібну сторінку
+						}
+					} else {
+						//якщо атрибута data-goto-page немає то просто скролимо до потрібного блоку
+						gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+					}
 				}
-				e.preventDefault();
 			}
+			
 		} else if (e.type === "watcherCallback" && e.detail) {
 			const entry = e.detail.entry;
 			const targetElement = entry.target;
 			// Обробка пунктів навігації, якщо вказано значення navigator, підсвічуємо поточний пункт меню
-			if (targetElement.dataset.watch === 'navigator') {
+			if (targetElement.dataset.watch === "navigator") {
 				const navigatorActiveItem = document.querySelector(`[data-goto]._navigator-active`);
 				let navigatorCurrentItem;
 				if (targetElement.id && document.querySelector(`[data-goto="#${targetElement.id}"]`)) {
@@ -60,10 +81,10 @@ export function pageNavigation() {
 				if (entry.isIntersecting) {
 					// Бачимо об'єкт
 					// navigatorActiveItem ? navigatorActiveItem.classList.remove('_navigator-active') : null;
-					navigatorCurrentItem ? navigatorCurrentItem.classList.add('_navigator-active') : null;
+					navigatorCurrentItem ? navigatorCurrentItem.classList.add("_navigator-active") : null;
 				} else {
 					// Не бачимо об'єкт
-					navigatorCurrentItem ? navigatorCurrentItem.classList.remove('_navigator-active') : null;
+					navigatorCurrentItem ? navigatorCurrentItem.classList.remove("_navigator-active") : null;
 				}
 			}
 		}
@@ -76,14 +97,14 @@ export function pageNavigation() {
 		} else if (document.querySelector(`.${getHash()}`)) {
 			goToHash = `.${getHash()}`;
 		}
-		goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
+		goToHash ? gotoBlock(goToHash, true, 600, 20) : null;
 	}
 }
 // Робота з шапкою при скролі
 export function headerScroll() {
 	addWindowScrollEvent = true;
-	const header = document.querySelector('header.header');
-	const headerShow = header.hasAttribute('data-scroll-show');
+	const header = document.querySelector("header.header");
+	const headerShow = header.hasAttribute("data-scroll-show");
 	const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
 	const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
 	let scrollDirection = 0;
@@ -92,23 +113,25 @@ export function headerScroll() {
 		const scrollTop = window.scrollY;
 		clearTimeout(timer);
 		if (scrollTop >= startPoint) {
-			!header.classList.contains('_header-scroll') ? header.classList.add('_header-scroll') : null;
+			!header.classList.contains("_header-scroll") ? header.classList.add("_header-scroll") : null;
 			if (headerShow) {
 				if (scrollTop > scrollDirection) {
 					// downscroll code
-					header.classList.contains('_header-show') ? header.classList.remove('_header-show') : null;
+					header.classList.contains("_header-show")
+						? header.classList.remove("_header-show")
+						: null;
 				} else {
 					// upscroll code
-					!header.classList.contains('_header-show') ? header.classList.add('_header-show') : null;
+					!header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
 				}
 				timer = setTimeout(() => {
-					!header.classList.contains('_header-show') ? header.classList.add('_header-show') : null;
+					!header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
 				}, headerShowTimer);
 			}
 		} else {
-			header.classList.contains('_header-scroll') ? header.classList.remove('_header-scroll') : null;
+			header.classList.contains("_header-scroll") ? header.classList.remove("_header-scroll") : null;
 			if (headerShow) {
-				header.classList.contains('_header-show') ? header.classList.remove('_header-show') : null;
+				header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null;
 			}
 		}
 		scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
@@ -118,9 +141,11 @@ export function headerScroll() {
 export function digitsCounter() {
 	// Функція ініціалізації
 	function digitsCountersInit(digitsCountersItems) {
-		let digitsCounters = digitsCountersItems ? digitsCountersItems : document.querySelectorAll("[data-digits-counter]");
+		let digitsCounters = digitsCountersItems
+			? digitsCountersItems
+			: document.querySelectorAll("[data-digits-counter]");
 		if (digitsCounters.length) {
-			digitsCounters.forEach(digitsCounter => {
+			digitsCounters.forEach((digitsCounter) => {
 				// Обнулення
 				digitsCounter.dataset.digitsCounter = digitsCounter.innerHTML;
 				digitsCounter.innerHTML = `0`;
@@ -132,15 +157,22 @@ export function digitsCounter() {
 	// Функція анімації
 	function digitsCountersAnimate(digitsCounter) {
 		let startTimestamp = null;
-		const duration = parseFloat(digitsCounter.dataset.digitsCounterSpeed) ? parseFloat(digitsCounter.dataset.digitsCounterSpeed) : 1000;
+		const duration = parseFloat(digitsCounter.dataset.digitsCounterSpeed)
+			? parseFloat(digitsCounter.dataset.digitsCounterSpeed)
+			: 1000;
 		const startValue = parseFloat(digitsCounter.dataset.digitsCounter);
-		const format = digitsCounter.dataset.digitsCounterFormat ? digitsCounter.dataset.digitsCounterFormat : ' ';
+		const format = digitsCounter.dataset.digitsCounterFormat
+			? digitsCounter.dataset.digitsCounterFormat
+			: " ";
 		const startPosition = 0;
 		const step = (timestamp) => {
 			if (!startTimestamp) startTimestamp = timestamp;
 			const progress = Math.min((timestamp - startTimestamp) / duration, 1);
 			const value = Math.floor(progress * (startPosition + startValue));
-			digitsCounter.innerHTML = typeof digitsCounter.dataset.digitsCounterFormat !== 'undefined' ? getDigFormat(value, format) : value;
+			digitsCounter.innerHTML =
+				typeof digitsCounter.dataset.digitsCounterFormat !== "undefined"
+					? getDigFormat(value, format)
+					: value;
 			if (progress < 1) {
 				window.requestAnimationFrame(step);
 			}
@@ -166,4 +198,3 @@ setTimeout(() => {
 		});
 	}
 }, 0);
-

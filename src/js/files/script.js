@@ -3,7 +3,6 @@ import { isMobile } from "./functions.js";
 // Підключення списку активних модулів
 import { flsModules } from "./modules.js";
 
-
 // TODO Кнопка скролу вверх
 const btnUp = {
   el: document.querySelector('.scroll-up'),
@@ -37,38 +36,6 @@ const btnUp = {
 
 btnUp.addEventListener();
 
-
-// TODO ПЛАВНИ СКРОЛЛІНГ ПО ЯКОРЯХ
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   if (window.location.hash) {
-//     const blockID = window.location.hash.substring(1);
-//        const targetElement = document.getElementById(blockID);
-//      if (targetElement) {
-//          targetElement.scrollIntoView({
-//              behavior: "auto",
-//              block: "start"
-//          });
-//      } 
-//   }
-// });
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   const menuIcon = document.querySelector('.menu__icon');
-//   const submenuLinks = document.querySelectorAll('.submenu__link');
-
-//   if (menuIcon) {
-//     menuIcon.addEventListener('click', function() {
-//       document.documentElement.classList.toggle('menu-open');
-//     });
-//   }
-
-//   submenuLinks.forEach(function(link) {
-//     link.addEventListener('click', function() {
-//       document.documentElement.classList.remove('menu-open');
-//     });
-//   });
-// });
 
 
 // TODO ПІДСВІТКА АКТИВНОЇ СТОРІНКИ ЗА ДОПМОГОЮ ЕЛЕМЕНТУ МЕНЮ
@@ -125,24 +92,26 @@ inputPassReg.setAttribute('type', 'password');
 
 //TODO Коди стран
 
-document.addEventListener('DOMContentLoaded', function() {
-  var input = document.querySelector("#registration__phone");
-  var iti = intlTelInput(input, {
+document.addEventListener('DOMContentLoaded', function () {
+  let input = document.querySelector("#registration__phone");
+  if (input) { // делать проверку на наличие чтобы не было ошибки в консоле
+    let iti = intlTelInput(input, {
       initialCountry: "auto",
-      geoIpLookup: function(callback) {
-          fetch("https://ipinfo.io/", {
-              method: "GET"
-          }).then(function(response) {
-              if (response.ok) {
-                  return response.json();
-              }
-              throw new Error("Failed to fetch country");
-          }).then(function(data) {
-              callback(data.country);
-          }).catch(function() {
-              callback("us"); // Default to United States
-          });
+      geoIpLookup: function (callback) {
+        fetch("https://ipinfo.io/", {
+          method: "GET"
+        }).then(function (response) {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Failed to fetch country");
+        }).then(function (data) {
+          callback(data.country);
+        }).catch(function () {
+          callback("us"); // Default to United States
+        });
       },
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-  });
+    });
+  }
 });
