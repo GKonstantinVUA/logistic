@@ -42,12 +42,12 @@ btnUp.addEventListener();
 
 const currentPage = window.location.pathname.split('/').pop();
 
-  const menuLinks = document.querySelectorAll('.menu__link');
-  menuLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPage) {
-      link.classList.add('active');
-    }
-  });
+const menuLinks = document.querySelectorAll('.menu__link');
+menuLinks.forEach(link => {
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+  }
+});
 
 
 //TODO Перебір form регистрації
@@ -72,22 +72,22 @@ const inputPass = document.getElementById('client-blank__cell-item-pass');
 const iconPass = document.getElementById('pass-icon');
 iconPass.addEventListener('click', () => {
 
-	if (inputPass.getAttribute('type') === "password") {
-inputPass.setAttribute('type', 'text');
-} else {
-inputPass.setAttribute('type', 'password');
-} 
+  if (inputPass.getAttribute('type') === "password") {
+    inputPass.setAttribute('type', 'text');
+  } else {
+    inputPass.setAttribute('type', 'password');
+  }
 });
 
 const inputPassReg = document.getElementById('client-blank__cell-item-pass-reg');
 const iconPassReg = document.getElementById('pass-icon-reg');
 iconPassReg.addEventListener('click', () => {
 
-	if (inputPassReg.getAttribute('type') === "password") {
-inputPassReg.setAttribute('type', 'text');
-} else {
-inputPassReg.setAttribute('type', 'password');
-} 
+  if (inputPassReg.getAttribute('type') === "password") {
+    inputPassReg.setAttribute('type', 'text');
+  } else {
+    inputPassReg.setAttribute('type', 'password');
+  }
 });
 
 //TODO Коди стран
