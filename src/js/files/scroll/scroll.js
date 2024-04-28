@@ -21,7 +21,6 @@ export function pageNavigation() {
 	function pageNavigationAction(e) {
 		if (e.type === "click") {
 			const targetElement = e.target;
-<<<<<<< HEAD
 			if (targetElement.closest("[data-goto]")) {
 				e.preventDefault();
 
@@ -29,15 +28,6 @@ export function pageNavigation() {
 				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : "";
 				const noHeader = gotoLink.hasAttribute("data-goto-header") ? true : false;
 				const onAnotherPage = gotoLink.hasAttribute("data-goto-page") ? true : false; // якщо можливий перехід на іншу сторінку
-=======
-			if (targetElement.closest('[data-goto]')) {
-				e.preventDefault();
-
-				const gotoLink = targetElement.closest('[data-goto]');
-				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : '';
-				const noHeader = gotoLink.hasAttribute('data-goto-header') ? true : false;
-				const onAnotherPage = gotoLink.hasAttribute('data-goto-page') ? true : false; // якщо можливий перехід на іншу сторінку
->>>>>>> 0b5a2d817b22e5251f5847aa7221e14d1b2e883f
 				const gotoSpeed = gotoLink.dataset.gotoSpeed ? gotoLink.dataset.gotoSpeed : 500;
 				const offsetTop = gotoLink.dataset.gotoTop ? parseInt(gotoLink.dataset.gotoTop) : 0;
 				if (flsModules.fullpage) {
@@ -50,10 +40,7 @@ export function pageNavigation() {
 						document.documentElement.classList.contains("menu-open") ? menuClose() : null;
 					}
 				} else {
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b5a2d817b22e5251f5847aa7221e14d1b2e883f
 					// якщо атрибут data-goto-page є
 					if (onAnotherPage) {
 						const targetBlockElement = document.querySelector(gotoLinkSelector);
@@ -70,13 +57,7 @@ export function pageNavigation() {
 						//якщо атрибута data-goto-page немає то просто скролимо до потрібного блоку
 						gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
 					}
-<<<<<<< HEAD
 				}
-=======
-
-				}
-
->>>>>>> 0b5a2d817b22e5251f5847aa7221e14d1b2e883f
 			}
 			
 		} else if (e.type === "watcherCallback" && e.detail) {
