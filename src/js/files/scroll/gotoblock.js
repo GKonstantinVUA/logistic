@@ -2,7 +2,7 @@
 import { isMobile, menuClose, getHash, FLS } from "../functions.js";
 // Підключення доповнення для збільшення можливостей
 // Документація: https://github.com/cferdinandi/smooth-scroll
-// import SmoothScroll from 'smooth-scroll';
+//import SmoothScroll from 'smooth-scroll';
 //==============================================================================================================================================================================================================================================================================================================================
 
 // Модуль плавної проктутки до блоку
@@ -38,8 +38,8 @@ export let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 
 				offset: offsetTop,
 				easing: 'easeOutQuad',
 			};
-			
 
+			
 			if (typeof SmoothScroll !== 'undefined') {
 				// Прокручування з використанням доповнення
 				new SmoothScroll().animateScroll(targetBlockElement, '', options);

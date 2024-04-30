@@ -25,7 +25,7 @@ export function pageNavigation() {
 				e.preventDefault();
 
 				const gotoLink = targetElement.closest('[data-goto]');
-				const gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : '';
+				let gotoLinkSelector = gotoLink.dataset.goto ? gotoLink.dataset.goto : '';
 				const noHeader = gotoLink.hasAttribute('data-goto-header') ? true : false;
 				const onAnotherPage = gotoLink.hasAttribute('data-goto-page') ? true : false; // якщо можливий перехід на іншу сторінку
 				const gotoSpeed = gotoLink.dataset.gotoSpeed ? gotoLink.dataset.gotoSpeed : 500;
@@ -40,7 +40,24 @@ export function pageNavigation() {
 				} else {
 					// якщо атрибут data-goto-page є
 					if (onAnotherPage) {
-						const targetBlockElement = document.querySelector(gotoLinkSelector);
+						let targetBlockElement;
+						targetBlockElement = document.querySelector(gotoLinkSelector);
+						if (!targetBlockElement) {
+							// якщо нема елементу то шукаємо так .${gotoLinkSelector}
+							targetBlockElement = document.querySelector(`.${gotoLinkSelector}`);
+							if (targetBlockElement){
+								// якщо елемент targetBlockElement то запишемо його в змінну gotoLinkSelector
+								gotoLinkSelector = `.${gotoLinkSelector}`;
+							}
+						}
+						if (!targetBlockElement) {
+							// якщо нема елементу то шукаємо так .${gotoLinkSelector}
+							targetBlockElement = document.querySelector(`#${gotoLinkSelector}`);
+							if (targetBlockElement) {
+								// якщо елемент targetBlockElement то запишемо його в змінну gotoLinkSelector
+								gotoLinkSelector = `#${gotoLinkSelector}`;
+							}
+						}
 						// то перевіряємо є потрібний елемент на сторінці
 						if (targetBlockElement) {
 							// якщо є то скролимо до нього
